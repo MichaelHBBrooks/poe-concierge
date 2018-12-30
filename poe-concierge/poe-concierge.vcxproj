@@ -164,8 +164,8 @@
     <ClInclude Include="API\Item.h" />
     <ClInclude Include="character\Character.h" />
     <ClInclude Include="character\PlayerCharacter.h" />
-    <ClInclude Include="lib\Attribute.h" />
-    <ClInclude Include="lib\SocketColor.h" />
+    <ClInclude Include="common\Attribute.h" />
+    <ClInclude Include="common\SocketColor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

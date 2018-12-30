@@ -38,10 +38,10 @@
     <ClInclude Include="character\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\SocketColor.h">
+    <ClInclude Include="common\Attribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Attribute.h">
+    <ClInclude Include="common\SocketColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
