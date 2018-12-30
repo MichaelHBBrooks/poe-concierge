@@ -155,17 +155,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Attribute.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="PlayerCharacter.h" />
-    <ClInclude Include="SocketColor.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="API\Item.cpp" />
     <ClCompile Include="character\Character.cpp" />
     <ClCompile Include="character\PlayerCharacter.cpp" />
     <ClCompile Include="poe-concierge.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="API\Item.h" />
+    <ClInclude Include="character\Character.h" />
+    <ClInclude Include="character\PlayerCharacter.h" />
+    <ClInclude Include="lib\Attribute.h" />
+    <ClInclude Include="lib\SocketColor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
