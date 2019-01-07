@@ -1,4 +1,4 @@
-#include "Character.h";
+#include "./Character.h";
 
 void Character::setHitPoints(unsigned short int newHitPoints) {
   Character::hitPoints = newHitPoints;
