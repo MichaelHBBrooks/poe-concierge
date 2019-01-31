@@ -1,6 +1,6 @@
 #include <iostream>
-#include "API/Item.h"
-#include "character/PlayerCharacter.h"
+#include "src/API/Item.h"
+#include "src/character/PlayerCharacter.h"
 
 void testPlayerCharacter();
 void testItem();

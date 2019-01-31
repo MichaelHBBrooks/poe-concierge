@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\API\Item.h" />
+    <ClInclude Include="src\character\Character.h" />
+    <ClInclude Include="src\character\PlayerCharacter.h" />
+    <ClInclude Include="src\common\Attribute.h" />
+    <ClInclude Include="src\common\SocketColor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\API\Item.cpp" />
+    <ClCompile Include="src\character\Character.cpp" />
+    <ClCompile Include="src\character\PlayerCharacter.cpp" />
+    <ClCompile Include="src\poe-concierge.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{9C2032A4-6DD4-49A5-988F-EC50B9221F5A}</ProjectGuid>
@@ -154,19 +167,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="API\Item.cpp" />
-    <ClCompile Include="character\Character.cpp" />
-    <ClCompile Include="character\PlayerCharacter.cpp" />
-    <ClCompile Include="poe-concierge.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="API\Item.h" />
-    <ClInclude Include="character\Character.h" />
-    <ClInclude Include="character\PlayerCharacter.h" />
-    <ClInclude Include="common\Attribute.h" />
-    <ClInclude Include="common\SocketColor.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

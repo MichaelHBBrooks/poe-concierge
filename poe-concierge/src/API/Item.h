@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include "common/Attribute.h"
-#include "common/SocketColor.h"
+#include "src/common/Attribute.h"
+#include "src/common/SocketColor.h"
 
 struct SocketType {
   SocketType(unsigned char, Attribute, SocketColor);
