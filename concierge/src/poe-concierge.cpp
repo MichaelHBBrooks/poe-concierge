@@ -89,12 +89,15 @@
 #include <string>
 #include <string_view>
 
-#include "curl_easy.h"
-#include "curl_exception.h"
-#include "curl_form.h"
-#include "curl_ios.h"
+#include "curlcpp/cookie.h"
+#include "curlcpp/cookie_datetime.h"
+#include "curlcpp/curl_cookie.h"
+#include "curlcpp/curl_easy.h"
+#include "curlcpp/curl_exception.h"
+#include "curlcpp/curl_form.h"
+#include "curlcpp/curl_ios.h"
 
-std::stringstream get_response(std::string_view url) {
+std::stringstream getStashItems(std::string_view url) {
   std::stringstream str;
   curl::curl_ios<std::stringstream> writer(str);
 
@@ -102,9 +105,30 @@ std::stringstream get_response(std::string_view url) {
 
   easy.add<CURLOPT_URL>(url.data());
   easy.add<CURLOPT_FOLLOWLOCATION>(1L);
+
+  //  Cookie
+  curl::cookie cookie;
+  curl::cookie_date date(curl::weekdays::MONDAY, 27, curl::months::MARCH, 2037);
+  curl::cookie_time time(20, 30, 30);
+  curl::cookie_datetime datetime(time, date);
+
+  cookie.set_name("POESESSID");
+  cookie.set_value("");  //  POESESSID goes here.
+  cookie.set_path("/");
+  cookie.set_domain(".pathofexile.com");
+  cookie.set_datetime(datetime);
+
+  //  Create a cookie object and add the previously created cookie.
+  curl::curl_cookie c_obj(easy);
+  c_obj.set(cookie);
+
+  curl::curlcpp_cookies cookies;
   try {
     easy.perform();
+    // cookies = c_obj.get();
+    // c_obj.erase();
   } catch (curl::curl_easy_exception error) {
+    std::cout << "error found\n";
     auto errors = error.get_traceback();
     error.print_traceback();
   }
@@ -115,12 +139,9 @@ std::stringstream get_response(std::string_view url) {
 int main() {
   using namespace std::string_literals;
 
-  auto appid = "...key..."s;
-  auto location = "Timisoara"s;
-  auto url = "https://api.openweathermap.org/data/2.5/weather?q=" + location +
-             "&appid=" + appid;
-
-  auto json = get_response(url);
+  auto url =
+      "https://www.pathofexile.com/character-window/get-stash-items?league=synthesis&tabs=0&tabIndex=0&accountName=Jinieren"s;
+  auto json = getStashItems(url);
 
   std::cout << json.str() << std::endl;
 
