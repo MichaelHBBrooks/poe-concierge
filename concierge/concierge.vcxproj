@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\API\Item.h" />
+    <ClInclude Include="src\API\webAPI.h" />
     <ClInclude Include="src\character\Character.h" />
     <ClInclude Include="src\character\PlayerCharacter.h" />
     <ClInclude Include="src\common\Attribute.h" />
@@ -27,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\API\Item.cpp" />
+    <ClCompile Include="src\API\webAPI.cpp" />
     <ClCompile Include="src\character\Character.cpp" />
     <ClCompile Include="src\character\PlayerCharacter.cpp" />
     <ClCompile Include="src\poe-concierge.cpp" />
@@ -104,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../nlohmann-json/include;../curl/include;../curlcpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../nlohmann-json/single_include;../curl/include;../curlcpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>

@@ -30,6 +30,9 @@
     <ClInclude Include="src\common\SocketColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\API\webAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\poe-concierge.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\API\Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\API\webAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
