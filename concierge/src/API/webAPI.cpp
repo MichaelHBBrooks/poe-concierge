@@ -8,11 +8,12 @@
 #include <curlcpp/curl_ios.h>
 #include <iostream>
 #include <map>
+#include <nlohmann/json.hpp>
 #include <ostream>
 #include <string>
 #include <string_view>
 
-std::stringstream webAPI::getStashItems(std::string_view url) {
+nlohmann::json webAPI::getStashItems(std::string_view url) {
   std::stringstream str;
   curl::curl_ios<std::stringstream> writer(str);
 
@@ -48,5 +49,5 @@ std::stringstream webAPI::getStashItems(std::string_view url) {
     error.print_traceback();
   }
 
-  return str;
+  return nlohmann::json::parse(str);
 }

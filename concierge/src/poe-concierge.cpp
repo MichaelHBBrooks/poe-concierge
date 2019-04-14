@@ -84,7 +84,6 @@
 //}
 
 #include <iostream>
-#include <nlohmann/json.hpp>
 #include <string>
 #include "API/webAPI.h"
 
@@ -93,11 +92,11 @@ int main() {
 
   auto url =
       "https://www.pathofexile.com/character-window/get-stash-items?league=synthesis&tabs=0&tabIndex=0&accountName=Jinieren"s;
-  auto json = webAPI::getStashItems(url);
+  auto j = webAPI::getStashItems(url);
 
   // std::cout << json.str() << std::endl;
   // auto j3 = json::parse("{ \"happy\": true, \"pi\": 3.141 }");
-  auto j = nlohmann::json::parse(json);
+  //auto j = nlohmann::json::parse(json);
   std::string s = j.dump();
   std::cout << s;
 
