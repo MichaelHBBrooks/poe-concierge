@@ -1,4 +1,4 @@
-#include "./PlayerCharacter.h"
+#include "character/PlayerCharacter.h"
 #include <string>
 
 std::string PlayerCharacter::getName() { return PlayerCharacter::name; }

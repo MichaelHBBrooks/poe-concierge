@@ -1,19 +1,24 @@
-#include "./webAPI.h"
-#include <curlcpp/cookie.h>
-#include <curlcpp/cookie_datetime.h>
-#include <curlcpp/curl_cookie.h>
-#include <curlcpp/curl_easy.h>
-#include <curlcpp/curl_exception.h>
-#include <curlcpp/curl_form.h>
-#include <curlcpp/curl_ios.h>
+#include "API/webAPI.h"
 #include <iostream>
 #include <map>
-#include <nlohmann/json.hpp>
 #include <ostream>
 #include <string>
 #include <string_view>
 
+//  CurlCPP
+#include "curlcpp/cookie.h"
+#include "curlcpp/cookie_datetime.h"
+#include "curlcpp/curl_cookie.h"
+#include "curlcpp/curl_easy.h"
+#include "curlcpp/curl_exception.h"
+#include "curlcpp/curl_form.h"
+#include "curlcpp/curl_ios.h"
+
+//  JSON
+#include "nlohmann/json.hpp"
+
 nlohmann::json webAPI::getStashItems(std::string_view url) {
+  const std::string api = "get-stash-items";
   std::stringstream str;
   curl::curl_ios<std::stringstream> writer(str);
 
@@ -29,7 +34,8 @@ nlohmann::json webAPI::getStashItems(std::string_view url) {
   curl::cookie_datetime datetime(time, date);
 
   cookie.set_name("POESESSID");
-  cookie.set_value("");  //  POESESSID goes here.
+  cookie.set_value(
+      "");  //  POESESSID goes here.
   cookie.set_path("/");
   cookie.set_domain(".pathofexile.com");
   cookie.set_datetime(datetime);
@@ -51,3 +57,6 @@ nlohmann::json webAPI::getStashItems(std::string_view url) {
 
   return nlohmann::json::parse(str);
 }
+
+const std::string webAPI::poeBaseUrl =
+    "https://www.pathofexile.com/character-window/";

@@ -25,12 +25,14 @@
     <ClInclude Include="src\character\PlayerCharacter.h" />
     <ClInclude Include="src\common\Attribute.h" />
     <ClInclude Include="src\common\SocketColor.h" />
+    <ClInclude Include="src\config\Config.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\API\Item.cpp" />
     <ClCompile Include="src\API\webAPI.cpp" />
     <ClCompile Include="src\character\Character.cpp" />
     <ClCompile Include="src\character\PlayerCharacter.cpp" />
+    <ClCompile Include="src\config\Config.cpp" />
     <ClCompile Include="src\poe-concierge.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -106,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../nlohmann-json/single_include;../curl/include;../curlcpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./src;../nlohmann-json/single_include;../curl/include;../curlcpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>

@@ -1,25 +1,30 @@
+#include <filesystem>
+#include <iostream>  // string, cout
+#include "config/Config.h"
 //#include <curl/curl.h>
-//#include <iostream>
 //#include <nlohmann/json.hpp>
 //#include <string>
 //#include "API/Item.h"
 //#include "character/PlayerCharacter.h"
-//
+//#include "API/webAPI.h"
+
 // void testPlayerCharacter();
 // void testItem();
 // void testJSON();
 // void testCURL();
-//
-// int main() {
-//  std::cout << "Hello World!\n";
-//  testPlayerCharacter();
-//  testItem();
-//
-//  testJSON();
-//  testCURL();
-//  return 0;
-//}
-//
+// void testAPI();
+
+int main() {
+  Config::initialize();
+
+  // testPlayerCharacter();
+  // testItem();
+  // testJSON();
+  // testCURL();
+  // testAPI();  // iostream, string, webAPI.h
+  return 0;
+}
+
 // void testPlayerCharacter() {
 //  PlayerCharacter me;
 //  me.setName("Test");
@@ -83,22 +88,14 @@
 //    curl_easy_cleanup(curl);
 //}
 
-#include <iostream>
-#include <string>
-#include "API/webAPI.h"
-
-int main() {
-  using namespace std::string_literals;
-
-  auto url =
-      "https://www.pathofexile.com/character-window/get-stash-items?league=synthesis&tabs=0&tabIndex=0&accountName=Jinieren"s;
-  auto j = webAPI::getStashItems(url);
-
-  // std::cout << json.str() << std::endl;
-  // auto j3 = json::parse("{ \"happy\": true, \"pi\": 3.141 }");
-  //auto j = nlohmann::json::parse(json);
-  std::string s = j.dump();
-  std::cout << s;
-
-  return 0;
-}
+// void testAPI() {
+//  using namespace std::string_literals;
+//
+//  std::string url =
+//      "https://www.pathofexile.com/character-window/"
+//      "get-stash-items?league=synthesis&tabs=0&tabIndex=0&accountName=";
+//  auto j = webAPI::getStashItems(url);
+//
+//  std::string s = j.dump();
+//  std::cout << s;
+//}
