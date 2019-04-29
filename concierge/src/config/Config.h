@@ -1,6 +1,5 @@
 #pragma once
 
-#include <mutex>  //call_once
 #include <string>
 #include <string_view>
 
@@ -14,7 +13,7 @@ class Config {
   static std::string_view getSessionID();
 
  private:
-  static std::once_flag initialized;
+  static bool initialized;
   static std::string accountName;
   static std::string sessionID;
 };

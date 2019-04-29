@@ -1,53 +1,73 @@
 #include "config/Config.h"
-#include <stdlib.h>  //getenv_s
-#include <exception>
-#include <iostream>  //cout
-#include <mutex>     //call_once
-#include <string>
-#include <string_view>
+#include <stdlib.h>     //getenv_s
+#include <cassert>      //assert
+#include <exception>    //runtime_error
+#include <filesystem>   //path, exists
+#include <fstream>      //ofstream
+#include <iostream>     //cout
+#include <string>       //string
+#include <string_view>  //string_view
 
 std::string getEnv(const char* const);
+void firstTimeSetup(const std::filesystem::path&);
 
-std::once_flag Config::initialized;
+bool Config::initialized = false;
 std::string Config::accountName = "";
 std::string Config::sessionID = "";
 
 void Config::initialize() {
-  std::call_once(Config::initialized, []() {
-    // Temporary
-    Config::setAccountName("");
-    Config::setSessionID("");
-    std::cout << "Account Name: " << Config::getAccountName() << std::endl;
+  assert(!Config::initialized);
+  Config::initialized = true;
 
-    const std::string dbInstallDir = "";
-    const std::string dbBin = dbInstallDir + "\\bin";
+  // Temporary
+  Config::setAccountName("");
+  Config::setSessionID("");
+  std::cout << "Account Name: " << Config::getAccountName() << std::endl;
 
-    // const std::filesystem::path home = getenv_s("USERPROFILE");
+  const std::string dbInstallDir = "";
+  const std::string dbBin = dbInstallDir + "\\bin";
 
-    const std::string asdf = getEnv("USERPROFILE");
-  });
+  const std::filesystem::path homePath = getEnv("USERPROFILE");
+  if (!std::filesystem::exists(homePath)) {
+    throw std::runtime_error("Unable to locate home directory");
+  }
+  const std::filesystem::path userDataPath = homePath / ".poe-concierge";
+  if (std::filesystem::exists(userDataPath)) {
+    std::cout << "Found user data.";
+  } else {
+    firstTimeSetup(userDataPath);
+  }
+}
+
+void firstTimeSetup(const std::filesystem::path& dataDir) {
+  std::cout << "Storing data in: " << dataDir << std::endl;
+  std::filesystem::create_directory(dataDir);
+  std::filesystem::path filePath = dataDir / "config";
+  std::ofstream fileStream;
+  int width = 30;
+  fileStream.open(filePath);
+  fileStream << "#User Data\n";
+  fileStream << std::left << std::setw(width) << "accountName"
+             << Config::getAccountName() << std::endl;
+  fileStream << std::left << std::setw(width) << "sessionID"
+             << Config::getSessionID() << std::endl;
+  fileStream.close();
 }
 
 std::string getEnv(const char* const name) {
   size_t requiredSize;
-  char* envVar;
-  getenv_s(&requiredSize, NULL, 0, name);
+  getenv_s(&requiredSize, nullptr, 0, name);
   if (requiredSize == 0) {
-    std::cout << name << " does not exist.\n";
-  } else {
-    envVar = (char*)malloc(requiredSize * sizeof(char));
-    if (envVar) {
-      getenv_s(&requiredSize, envVar, requiredSize, name);
-      const std::string envVarStr = envVar;
-      free(envVar);
-      std::cout << name << " is: " << envVarStr << std::endl;
-      return envVarStr;
-
-    } else {
-      std::cout << "Failed to allocate memory.\n";
-    }
+    throw std::runtime_error(std::string() +
+                             "Environment variable is undefined: " + name);
   }
-  return "";
+  std::string envVar;
+  envVar.resize(requiredSize);
+  getenv_s(&requiredSize, envVar.data(), requiredSize, name);
+  //  Since getenv_s deposits the data as a char, the null terminator needs to
+  //  be removed.
+  envVar.erase(std::find(envVar.begin(), envVar.end(), '\0'), envVar.end());
+  return envVar;
 }
 
 void Config::setAccountName(std::string_view name) {

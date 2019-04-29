@@ -1,5 +1,5 @@
 #include <filesystem>
-#include <iostream>  // string, cout
+#include <iostream>  // cerr
 #include "config/Config.h"
 //#include <curl/curl.h>
 //#include <nlohmann/json.hpp>
@@ -15,7 +15,12 @@
 // void testAPI();
 
 int main() {
-  Config::initialize();
+  try {
+    Config::initialize();
+  } catch (const std::runtime_error& e) {
+    std::cerr << e.what() << std::endl;
+    exit(EXIT_FAILURE);
+  }
 
   // testPlayerCharacter();
   // testItem();
@@ -93,7 +98,7 @@ int main() {
 //
 //  std::string url =
 //      "https://www.pathofexile.com/character-window/"
-//      "get-stash-items?league=synthesis&tabs=0&tabIndex=0&accountName=";
+//      "get-stash-items?league=synthesis&tabs=0&tabIndex=0&accountName=Jinieren";
 //  auto j = webAPI::getStashItems(url);
 //
 //  std::string s = j.dump();
