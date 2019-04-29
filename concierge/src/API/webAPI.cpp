@@ -4,6 +4,7 @@
 #include <ostream>
 #include <string>
 #include <string_view>
+#include "config/Config.h"
 
 //  CurlCPP
 #include "curlcpp/cookie.h"
@@ -34,8 +35,8 @@ nlohmann::json webAPI::getStashItems(std::string_view url) {
   curl::cookie_datetime datetime(time, date);
 
   cookie.set_name("POESESSID");
-  cookie.set_value(
-      "");  //  POESESSID goes here.
+  // TODO: Fix messy string_view copy.
+  cookie.set_value(std::string(Config::getSessionID()).data());
   cookie.set_path("/");
   cookie.set_domain(".pathofexile.com");
   cookie.set_datetime(datetime);
