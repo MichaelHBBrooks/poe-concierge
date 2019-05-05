@@ -35,6 +35,9 @@
     <ClCompile Include="src\config\Config.cpp" />
     <ClCompile Include="src\poe-concierge.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8A63C766-49FC-45E3-9CA9-DF2B412A6C90}</ProjectGuid>
